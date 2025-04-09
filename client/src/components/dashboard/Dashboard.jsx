@@ -190,11 +190,13 @@ const Dashboard = () => {
   };
 
   const clicksData = {
-    labels: Object.keys(analytics?.clicksByDate || {}),
+    labels: Object.keys(analytics?.clicksByDate || {}).sort(),
     datasets: [
       {
         label: "Clicks",
-        data: Object.values(analytics?.clicksByDate || {}),
+        data: Object.keys(analytics?.clicksByDate || {})
+          .sort()
+          .map((date) => analytics.clicksByDate[date]),
         fill: false,
         borderColor: "rgb(75, 192, 192)",
         tension: 0.1,
@@ -307,9 +309,16 @@ const Dashboard = () => {
                         <div className="space-y-1">
                           <p className="font-medium">{url.originalUrl}</p>
                           <div className="flex items-center space-x-2">
-                            <Badge variant="secondary">
-                              {getShortUrl(url.shortCode)}
-                            </Badge>
+                            <a
+                              href={getShortUrl(url.shortCode)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:underline"
+                            >
+                              <Badge variant="secondary">
+                                {getShortUrl(url.shortCode)}
+                              </Badge>
+                            </a>
                             <Button
                               size="icon"
                               variant="ghost"
