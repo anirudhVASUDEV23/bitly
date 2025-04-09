@@ -1,4 +1,4 @@
-// API Route import express from "express";
+import express from "express";
 import cors from "cors";
 import { connectDB } from "./db/connection.js";
 import { PORT } from "./config.js";
@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Welcome route
 app.get("/", (req, res) => {
-  res.json({
+  res.status(200).json({
     message: "Backend is up and running! You can use the frontend now.",
     frontend: "https://bitly-url-chi.vercel.app/",
     status: "online",
@@ -29,29 +29,24 @@ app.get("/", (req, res) => {
   });
 });
 
-// API Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/links", linkRoutes);
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Health check route
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
 });
-app.use("/api/auth", authRoutes);
-app.use("/api/links", linkRoutes);
-app.use("/all", async (req, res) => {
+
+// Debug route to see all users (development only)
+app.get("/all", async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // hides password
+    const users = await User.find().select("-password");
     res.json(users);
   } catch (err) {
     res.status(500).json({ error: "Something went wrong" });
   }
 });
 
-// Health check route
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
+// API Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/links", linkRoutes);
 
 // Start server
 app.listen(PORT, () => {
