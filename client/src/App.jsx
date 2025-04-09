@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import store from "./store";
+import config from "./config";
 
 // Components
 import Login from "./components/auth/Login";
@@ -13,6 +14,10 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import NotFound from "./components/NotFound";
 
 function App() {
+  useEffect(() => {
+    console.log("API URL:", config.apiUrl);
+  }, []);
+
   return (
     <Provider store={store}>
       <BrowserRouter>

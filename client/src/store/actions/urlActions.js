@@ -7,9 +7,8 @@ import {
   createUrlSuccess,
   createUrlFailure,
 } from "../slices/urlSlice";
-import { toast } from "react-toastify";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+import { toast } from "sonner";
+import config from "../../config";
 
 export const fetchUrls =
   (page = 1, limit = 10, search = "") =>
@@ -20,7 +19,7 @@ export const fetchUrls =
         auth: { token },
       } = getState();
 
-      const response = await axios.get(`${API_URL}/links`, {
+      const response = await axios.get(`${config.apiUrl}/links`, {
         params: { page, limit, search },
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -41,7 +40,7 @@ export const createUrl = (urlData) => async (dispatch, getState) => {
       auth: { token },
     } = getState();
 
-    const response = await axios.post(`${API_URL}/links`, urlData, {
+    const response = await axios.post(`${config.apiUrl}/links`, urlData, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -59,9 +58,12 @@ export const createUrl = (urlData) => async (dispatch, getState) => {
 
 export const getUrlAnalytics = async (shortId, token) => {
   try {
-    const response = await axios.get(`${API_URL}/links/${shortId}/analytics`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(
+      `${config.apiUrl}/links/${shortId}/analytics`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   } catch (error) {
     const errorMessage =

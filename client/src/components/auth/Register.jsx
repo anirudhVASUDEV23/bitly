@@ -19,6 +19,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Icons } from "@/components/ui/icons";
 import { Link2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import config from "../../config";
+
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -49,14 +52,11 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/register",
-        {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }
-      );
+      const response = await axios.post(`${config.apiUrl}/auth/register`, {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
 
       if (response.data.success) {
         toast.success("Registration successful! Please login to continue.");

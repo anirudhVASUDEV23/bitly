@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Icons } from "@/components/ui/icons";
 import { Link2, ArrowRight } from "lucide-react";
+import config from "../../config";
 
 const Login = () => {
   const [email, setEmail] = useState("intern@dacoid.com");
@@ -32,6 +33,8 @@ const Login = () => {
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.auth
   );
+
+  console.log(config.apiUrl);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -44,13 +47,10 @@ const Login = () => {
     dispatch(loginStart());
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${config.apiUrl}/auth/login`, {
+        email,
+        password,
+      });
 
       if (response.data.success) {
         dispatch(loginSuccess(response.data));

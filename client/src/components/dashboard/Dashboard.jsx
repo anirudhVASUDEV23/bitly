@@ -46,6 +46,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Copy, QrCode, ChartBar, Calendar as CalendarIcon } from "lucide-react";
+import config from "../../config";
 
 ChartJS.register(
   CategoryScale,
@@ -58,7 +59,7 @@ ChartJS.register(
   Legend
 );
 
-const API_URL = "http://localhost:4000/api";
+const API_URL = config.apiUrl;
 
 const Dashboard = () => {
   const [longUrl, setLongUrl] = useState("");
