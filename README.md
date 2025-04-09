@@ -5,7 +5,7 @@ A modern URL shortening service with analytics, built using the **MERN stack** (
 ## 🚀 Live Demo
 
 - **Frontend** (Vercel): [https://bitly-url-chi.vercel.app/](https://bitly-url-chi.vercel.app/)
-- **Backend** (Render): [https://bitly-k3vg.onrender.com/](https://bitly-k3vg.onrender.com/)
+- **Backend** (Render): [https://bitly-k3vg.onrender.com/](https://bitly-k3vg.onrender.com/all)
 
 > ⚠️ Note: Backend is hosted on Render’s free tier, so the server may take a few seconds to wake up after periods of inactivity.
 
