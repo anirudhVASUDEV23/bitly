@@ -11,6 +11,16 @@ A modern URL shortening service with analytics, built using the **MERN stack** (
 
 ---
 
+## 🧪 Test Credentials
+
+To explore the app quickly without registering:
+
+- **Email:** `intern@dacoid.com`  
+- **Password:** `Test123`
+
+> These credentials are hardcoded in the database for demo purposes.(If you just want to test go to login page via register page and use these credentials there)
+
+
 ## ✨ Features
 
 - 🔗 **URL Shortening**
